@@ -3,7 +3,7 @@
 users.users.kezess = {
   isNormalUser = true;
   initialPassword = "100000";
-  extraGroups = [ "wheel" "networkmanager" "video" ];
+  extraGroups = [ "wheel" "networkmanager" "video" "docker" "postgres" ];
   shell = pkgs.zsh;
 	};
 services.displayManager.sddm.settings = {
@@ -18,4 +18,5 @@ fonts.packages = with pkgs; [
   noto-fonts-color-emoji
   nerd-fonts.jetbrains-mono
 ];
+
 }

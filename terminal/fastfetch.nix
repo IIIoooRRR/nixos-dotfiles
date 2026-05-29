@@ -30,6 +30,9 @@
           { "type": "kernel", "key": " ", "keyColor": "magenta" },
           { "type": "shell", "key": " ", "keyColor": "magenta" },
           { "type": "memory", "key": " ", "keyColor": "magenta" },
+	  { "type": "disk","key": "","keyColor": "magenta", "format": "{1} / {2} ({3})"},
+
+
           "break",
           "colors"
         ]

@@ -35,7 +35,8 @@ environment.systemPackages = with pkgs; [
     telegram-desktop
     firefox
     vesktop
-    #screen
+    
+   #screen
 	grim
 	slurp
 	brightnessctl 
@@ -47,15 +48,24 @@ environment.systemPackages = with pkgs; [
     tree
     #music
 	(ncmpcpp.override { visualizerSupport = true; })	
-  ];
+];
   environment.variables = {
     GDK_BACKEND = "wayland";
     CLUTTER_BACKEND = "wayland";
     QT_QPA_PLATFORM = "wayland";
-    SDL_VIDEODRIVER = "wayland";
+#    SDL_VIDEODRIVER = "wayland";
     _JAVA_AWT_WM_NONREPARENTING = "1";
   };
 networking.nftables.enable = true;
+  programs.git = {
+    enable = true;
+    lfs.enable = true;  
+  };
 services.flatpak.enable = true;
-
+programs.steam = {
+  enable = true;
+  remotePlay.openFirewall = true; 
+  dedicatedServer.openFirewall = true;
+};
+virtualisation.waydroid.enable = true;
 }

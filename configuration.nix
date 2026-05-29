@@ -16,6 +16,10 @@ in
   ./hardware-configuration.nix
   ./default/user.nix
   ./default/packages.nix
+  ./default/docker.nix
+  ./default/database.nix
+  ./system/steam.nix
+  ./system/system.nix
    (import "${home-manager}/nixos")
   ./display/niri.nix
   ./display/write.nix
@@ -27,7 +31,6 @@ in
   ./music/ncmpcpp.nix
   ./music/visual.nix
   ];
-
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
@@ -50,6 +53,13 @@ services.xserver.xkb.options = "grp:alt_shift_toggle";
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
   networking.firewall.checkReversePath = false;
+  networking.extraHosts = ''
+  # Базовые записи по умолчанию
+  127.0.0.1 localhost
+  ::1       localhost
+
+  127.0.0.1 animori.local minio.animori.local s3.animori.local mail.animori.local supervisord-monitor.animori.local rabbitmq.animori.local animori-backend
+'';
   time.timeZone = "Asia/Novosibirsk";
 
     i18n.defaultLocale = "en_US.UTF-8";
@@ -101,7 +111,7 @@ services.xserver.xkb.options = "grp:alt_shift_toggle";
 '';
 
 
-
+  nix.settings.auto-optimise-store = true;
   system.stateVersion = "25.11";
 
 }

@@ -17,7 +17,7 @@ in
     spawn-at-startup "mako"
 
     spawn-at-startup "${terminal}" "--title" "lavat" "-e" "bash" "-c" "lavat; exec bash"
-    spawn-at-startup "${terminal}" "--title" "${terminal}" "-e" "bash" "-c" "${terminal}; exec bash"
+    spawn-at-startup "${terminal}" "--title" "${terminal}"
     spawn-at-startup "${terminal}" "--title" "ncmpcpp" "-e" "bash" "-c" "ncmpcpp; exec bash"
     spawn-at-startup "${terminal}" "--title" "peaclock" "-e" "bash" "-c" "peaclock; exec bash"
     spawn-at-startup "${terminal}" "--title" "yazi" "-e" "bash" "-c" "yazi; exec bash"
@@ -62,29 +62,7 @@ in
     window-rule {
         match app-id="org.vinegarhq.Sober"
         opacity 1.00
-   }
-   
-window-rule {
-    match title="lavat"
-    match title="${terminal}"
-    default-column-width { fixed 694; }
-    default-window-height { fixed 501; }
-}
-
-window-rule {
-    match title="peaclock"
-    match title="yazi"
-    match title="cava"
-    default-column-width { fixed 569; }
-    default-window-height { fixed 329; }
-}
-
-window-rule {
-    match title="ncmpcpp"
-    default-column-width { fixed 569; }
-    default-window-height { fixed 1018; }
-}
-
+   }   
 binds {
     Print { spawn "sh" "-c" "grim - | wl-copy"; }
     Shift+Mod+S { spawn "sh" "-c" "grim -g \"$(slurp)\" - | wl-copy"; }
@@ -99,6 +77,7 @@ binds {
     Mod+F { spawn "${terminal}" "-e" "bash" "-c" "yazi; exec bash"; }
     Mod+M { spawn "${terminal}" "-e" "bash" "-c" "ncmpcpp; exec bash"; }
     Mod+L { spawn "${terminal}" "-e" "bash" "-c" "lavat; exec bash"; }
+    Mod+Shift+C { spawn "${terminal}" "-e" "bash" "-c" "cava; exec bash"; }
     Mod+G { spawn "steam-run" "/home/kezess/GoLand-2026.1/bin/goland"; }
 
     // navig
@@ -106,9 +85,16 @@ binds {
     Mod+Right { focus-column-right; }
     Mod+Up { focus-window-up; }
     Mod+Down { focus-window-down; }
-    Mod+Shift+H { move-column-left; }
-    Mod+Shift+L { move-column-right; }
+    	// вытолкнуть или втолкнуть окно
+    Mod+Shift+L { expel-window-from-column; }
+    Mod+Shift+semicolon { consume-window-into-column; }
+	//перемещение окон
+    Mod+Shift+J { move-window-down; }
+    Mod+Shift+K { move-window-up; }
+    Mod+Shift+O { move-column-left; }
+    Mod+Shift+I { move-column-right; }
     Mod+C { center-column; }
+
     Mod+Minus { set-column-width "-10%"; }
     Mod+Equal { set-column-width "+10%"; }
 
