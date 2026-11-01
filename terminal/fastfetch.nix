@@ -1,7 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  home-manager.users.kezess = {
     home.file.".config/fastfetch/config.jsonc".text = ''
       {
         "$schema": "https://github.com",
@@ -30,13 +29,9 @@
           { "type": "kernel", "key": " ", "keyColor": "magenta" },
           { "type": "shell", "key": " ", "keyColor": "magenta" },
           { "type": "memory", "key": " ", "keyColor": "magenta" },
-	  { "type": "disk","key": "","keyColor": "magenta", "format": "{1} / {2} ({3})"},
-
-
           "break",
           "colors"
         ]
       }
     '';
-  };
 }

@@ -1,5 +1,13 @@
 {config, lib, pkgs, ...}:
 {
+ i18n = {
+    defaultLocale = "en_US.UTF-8";
+    supportedLocales = [
+      "en_US.UTF-8/UTF-8"
+      "ru_RU.UTF-8/UTF-8"
+    ];
+    # supportedLocales = all;
+  };
 environment.systemPackages = with pkgs; [
     #visual
     libGL
@@ -9,63 +17,44 @@ environment.systemPackages = with pkgs; [
     glib
     gtk3
     libxkbcommon
-    xwayland-satellite
-   #design      
-    swaybg          
+    xdg-desktop-portal-gtk
+   #design               
     wl-clipboard
-    zsh
-    fastfetch
     imagemagick
-    lavat
-    cava
-    peaclock
     #utils
-    git
-    curl
-    nftables
-    yazi
-    kitty
     steam-run
-    #comfort
-    waybar
-    fuzzel
-    mako  #уведы
-    swaylock
+    iptables
+    blockbench
+    onlyoffice-desktopeditors
     #social
     telegram-desktop
     firefox
-    vesktop
-    
+    vesktop   
+    #term
+    fish	
+
    #screen
-	grim
-	slurp
-	brightnessctl 
-  	wireplumber
+    grim
+    slurp
+    #games
+    umu-launcher
     #programming
-    go
+    jdk21
+    jdk17
+    jdk25
+    go_1_27
     gcc
     gnumake
-    tree
-    #music
-	(ncmpcpp.override { visualizerSupport = true; })	
+    gopls
+    gotools
 ];
-  environment.variables = {
-    GDK_BACKEND = "wayland";
-    CLUTTER_BACKEND = "wayland";
-    QT_QPA_PLATFORM = "wayland";
-#    SDL_VIDEODRIVER = "wayland";
-    _JAVA_AWT_WM_NONREPARENTING = "1";
-  };
-networking.nftables.enable = true;
-  programs.git = {
-    enable = true;
-    lfs.enable = true;  
-  };
+
+fonts.packages = with pkgs; [
+  noto-fonts
+  noto-fonts-cjk-sans
+  noto-fonts-color-emoji
+  nerd-fonts.jetbrains-mono
+];
 services.flatpak.enable = true;
-programs.steam = {
-  enable = true;
-  remotePlay.openFirewall = true; 
-  dedicatedServer.openFirewall = true;
-};
-virtualisation.waydroid.enable = true;
+programs.dconf.enable = true; # программа сохранения настроек
 }

@@ -1,22 +1,15 @@
-{config, pkgs, ...}:
+{config, pkgs, mainUser, ...}:
 {
-users.users.kezess = {
-  isNormalUser = true;
-  initialPassword = "100000";
-  extraGroups = [ "wheel" "networkmanager" "video" "docker" "postgres" ];
-  shell = pkgs.zsh;
-	};
-services.displayManager.sddm.settings = {
-  Theme = {
-    Font = "Noto Sans,10";
-  };
-};
-
-fonts.packages = with pkgs; [
-  noto-fonts
-  noto-fonts-cjk-sans
-  noto-fonts-color-emoji
-  nerd-fonts.jetbrains-mono
-];
-
+ imports = [
+ ./docker.nix
+ ./database.nix
+ ];
+  nix.settings.trusted-users = [ "root" "${mainUser}"];
+  programs.fish.enable = true;
+  users.users.${mainUser} = {
+    isNormalUser = true;
+    initialPassword = "100000";
+    extraGroups = [ "wheel" "networkmanager" "video" "docker" "postgres" ];
+    shell = pkgs.fish;
+    };
 }
